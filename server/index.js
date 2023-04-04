@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
-// import mongoose from 'mongoose';
-import PORT from './src/config/index.js';
+import mongoose from 'mongoose';
+import { MONGODB_URI, PORT } from './src/config/index.js';
 
 // basic configuration
 const app = express();
@@ -14,7 +14,7 @@ app.use(cors());
 
 async function startApp() {
     try {
-        // await mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
         app.listen(PORT, () => {
             console.log(`Server started on port ${PORT}!`);
         });

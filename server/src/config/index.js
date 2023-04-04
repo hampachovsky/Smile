@@ -2,6 +2,6 @@ import 'dotenv/config';
 
 const PORT = process.env.PORT || 5001;
 
-// TODO: HERE ADD MONGODB URI
+const { MONGODB_URI } = process.env;
 
-export default PORT;
+export { PORT, MONGODB_URI };
