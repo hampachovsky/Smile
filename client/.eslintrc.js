@@ -4,27 +4,9 @@ module.exports = {
         es2021: true,
         jest: true,
     },
-    extends: [
-        'eslint:recommended',
-        'airbnb-typescript',
-        'airbnb/hooks',
-        'airbnb',
-        'prettier',
-        'plugin:react/recommended',
-        'plugin:@typescript-eslint/recommended',
-    ],
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true,
-        },
-        ecmaVersion: 12,
-        sourceType: 'module',
-        project: 'tsconfig.json',
-        tsconfigRootDir: __dirname,
-    },
-    plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
-    ignorePatterns: ['.eslintrc.js', 'craco.config.js'],
+    extends: ['react-app', 'airbnb', 'plugin:jsx-a11y/recommended', 'prettier'],
+    plugins: ['jsx-a11y', 'prettier', 'react', 'react-hooks'],
+    ignorePatterns: ['.eslintrc.js'],
     settings: {
         'import/resolver': {
             node: {
@@ -43,11 +25,11 @@ module.exports = {
         'import/no-unresolved': 'off',
         'react/self-closing-comp': 'off',
         'no-shadow': 'off',
-        '@typescript-eslint/no-shadow': ['error'],
         'react/require-default-props': 'off',
+        'react/react-in-jsx-scope': 'off',
+        'jsx-a11y/click-events-have-key-events': 'off',
+        'jsx-a11y/no-static-element-interactions': 'off',
         'no-underscore-dangle': 'off',
-        '@typescript-eslint/no-non-null-assertion': 'off',
-        '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
         'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
         'prettier/prettier': [
             'error',
