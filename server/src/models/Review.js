@@ -12,7 +12,7 @@ const reviewSchema = new mongoose.Schema({
         required: true,
     },
     ratio: {
-        type: String,
+        type: Number,
         max: 5,
         min: 1,
     },

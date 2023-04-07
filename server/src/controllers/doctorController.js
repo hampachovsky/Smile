@@ -40,7 +40,33 @@ const doctorController = {
             return res.status(200).json(doctor);
         } catch (error) {
             console.log(error);
-            return res.status(400).json({ error: 'failed create category' });
+            return res.status(400).json({ error: 'failed create doctor' });
+        }
+    },
+    async delete(req, res) {
+        try {
+            const doctorId = req.params.id;
+            if (!doctorId) return res.status(400).json({ error: 'Doctor id not provided' });
+            await Doctor.findByIdAndRemove(doctorId);
+            return res.status(200).json(null);
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ error: 'failed delete doctor' });
+        }
+    },
+    async update(req, res) {
+        try {
+            const { id } = req.params;
+            if (!id) {
+                res.status(400).json({ error: 'Id missed' });
+            }
+            const updatedDoctor = await Doctor.findByIdAndUpdate(id, req.body, {
+                new: true,
+            });
+            return res.status(200).json(updatedDoctor);
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ error: 'Update doctor error' });
         }
     },
 };
