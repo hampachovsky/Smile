@@ -1,0 +1,36 @@
+$black: #000;
+$white: #fff;
+$blue: #1D3C89;
+$dark-blue: #1A253E;
+$orange: #FFE7DB;
+$light-blue: #EBF3FF;
+
+@mixin text($size, $weight, $height) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $height;
+}
+
+
+@mixin button(){
+    padding: 8px 20px;
+    border-radius: 20px;
+    background-color: $blue;
+    outline:none;
+    border:none;
+    @include text(15px, 700, 20px);
+    color: $white;
+    cursor: pointer;
+}
+
+@mixin popup__before(){
+    position: absolute;
+    content: '';
+    width: 60px;
+    height: 60px;
+    top: -20px;
+    left: -20px;
+    background-color: #FFE7DB;
+    transform: translateZ(-1px);
+    border-radius:100%;
+}
