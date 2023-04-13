@@ -1,0 +1,103 @@
+@import '../../variable.scss';
+
+.leave-review{
+    position: relative;
+    width: 30%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    background-color: #fff;
+    padding: 30px;
+    transform-style: preserve-3d;
+
+    &::before{
+        @include popup__before();
+    }
+
+    &__close{
+        position: relative;
+        left: calc(100% - 16px);
+        top: -12px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    &__form{
+        margin-top: 40px;
+        position: relative;
+        input{
+            margin-bottom: 20px;
+        }
+        textarea{
+            margin-bottom: 20px;
+        }
+        input, textarea{
+            display: block;
+            width: 100%;
+            resize: none;
+            border: 1px solid #D9D9D9;
+            border-radius: 10px;
+            padding: 10px 25px;
+
+            &::placeholder{
+                color: #D9D9D9;
+            }
+        }
+
+    }
+
+    .error{
+        position: absolute;
+        color: red;
+        @include text(12px, 400, 14px);
+        margin: 0;
+        top: 0;
+
+        &__name{
+            top: 40px;
+        }
+
+        &__review{
+            top: 120px;
+        }
+
+        &__agree{
+            top: 230px;
+        }
+    }
+
+    .star-svg{
+        width: 30px;
+        height: auto;
+        & + .star-svg{
+            margin-left: 10px;
+        }
+    }
+
+    &__agree-block{
+        display: flex;
+        align-items: flex-start;
+        margin-top: 20px;
+
+        input{
+            width: 40px;
+            margin: 0;
+            margin-top: 5px;
+        }
+
+        label{
+            width: 100%;
+        }
+    }
+
+    &__submit{
+        @include button();
+        margin-top: 20px;
+    }
+}
+
+
