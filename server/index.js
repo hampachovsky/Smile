@@ -2,15 +2,18 @@ import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import { MONGODB_URI, PORT } from './src/config/index.js';
+import unknownEndpoint from './src/middlewares/unknownEndpoint.js';
+import router from './src/routes/index.js';
 
 // basic configuration
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '25mb' }));
 app.use(cors());
 
-// TODO: Add router here
+app.use('/api', router);
 
-// TODO: if routes not found
+// if routes not found
+app.use(unknownEndpoint);
 
 async function startApp() {
     try {
