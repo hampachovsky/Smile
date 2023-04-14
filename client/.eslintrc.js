@@ -19,6 +19,7 @@ module.exports = {
         'linebreak-style': 'off',
         'react/jsx-props-no-spreading': 'off',
         'react/prop-types': 'off',
+        'no-unused-vars': 'warn',
         'import/prefer-default-export': 'off',
         'no-param-reassign': ['error', { props: false }],
         'react/function-component-definition': 'off',
