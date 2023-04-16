@@ -1,8 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/no-this-in-sfc */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
@@ -10,7 +9,7 @@ import InputMask from 'react-input-mask';
 import close from '../../images/close.svg';
 import './index.scss';
 
-export const OrderCall = ({ handleClose }) => {
+export const AskQuestion = ({ handleClose }) => {
     const {
         register,
         handleSubmit,
@@ -25,19 +24,26 @@ export const OrderCall = ({ handleClose }) => {
 
     return (
         <div className='box'>
-            <div className='order-call'>
-                <button className='order-call__close' onClick={handleClose} type='button'>
+            <div className='ask-question'>
+                <button className='ask-question__close' onClick={handleClose} type='button'>
                     <img src={close} alt='Закрити' />
                 </button>
-                <h2 className='order-call__title title2'>Замовити дзвінок</h2>
-                <p className='order-call__description'>
-                    Відповімо на будь-яке питання про лікування та запишемо до фахівця на прийом
+                <h2 className='ask-question__title title2'>Поставити нам запитання</h2>
+                <p className='ask-question__description'>
+                    Відповімо на будь-яке питання про сервіс та лікування у нашій стоматології.
                 </p>
-                <form onSubmit={handleSubmit((data) => data)} className='order-call__form'>
+                <form onSubmit={handleSubmit((data) => data)} className='ask-question__form'>
                     <input {...register('name', { required: true })} placeholder='Введіть ім’я' />
                     {errors.name && <p className='error error__name'>Введіть ваше ім’я</p>}
                     <PhoneNumber onChange={onChange} value={phone} />
-                    <div className='order-call__agree-block'>
+                    <textarea
+                        {...register('question', { required: true })}
+                        placeholder='Коротко опишіть суть питання'
+                    />
+                    {errors.question && (
+                        <p className='error error__question'>Введіть суть запитання</p>
+                    )}
+                    <div className='ask-question__agree-block'>
                         <input
                             type='checkbox'
                             value='agree'
@@ -50,7 +56,7 @@ export const OrderCall = ({ handleClose }) => {
                         </label>
                         {errors.agree && <p className='error error__agree'>Ви не погодились</p>}
                     </div>
-                    <input className='order-call__submit' type='submit' value='Відправити запит' />
+                    <input className='ask-question__submit' type='submit' value='Записатися' />
                 </form>
             </div>
         </div>

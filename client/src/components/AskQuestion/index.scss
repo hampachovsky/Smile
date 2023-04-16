@@ -1,6 +1,6 @@
 @import '../../variable.scss';
 
-.order-call{
+.ask-question{
     position: relative;
     width: 30%;
     height: auto;
@@ -11,7 +11,7 @@
     background-color: #fff;
     padding: 30px;
     transform-style: preserve-3d;
-    
+
     &::before{
         @include popup__before();
     }
@@ -61,10 +61,15 @@
             top: 40px;
         }
 
+        &__question{
+            top:180px;
+        }
+
         &__agree{
-            top: 160px;
+            top: 240px;
         }
     }
+
 
     &__agree-block{
         display: flex;
