@@ -1,1 +1,1 @@
-export const Reviews = () => <p>dsijfd</p>;
+export const Reviews = () => <p>dsijd</p>;
