@@ -2,7 +2,16 @@ import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 
-import { PricesRow, Offer, Doctor, Review, LeaveReview, OrderCall } from '../../components';
+import {
+    PricesRow,
+    Offer,
+    Doctor,
+    Review,
+    LeaveReview,
+    OrderCall,
+    DoctorAppointment,
+    AskQuestion,
+} from '../../components';
 
 import './home.scss';
 import 'swiper/css';
@@ -43,6 +52,8 @@ export const Home = () => {
 
     const [openLeaveReview, setOpenLeaveReview] = useState(false);
     const [openOrderCall, setOpenOrderCall] = useState(false);
+    const [openDoctorAppointment, setOpenDoctorAppointment] = useState(false);
+    const [openAskQuestion, setOpenAskQuestion] = useState(false);
 
     const toggleOpenLeaveReview = () => {
         setOpenLeaveReview(!openLeaveReview);
@@ -50,6 +61,14 @@ export const Home = () => {
 
     const toggleOpenOrderCall = () => {
         setOpenOrderCall(!openOrderCall);
+    };
+
+    const toggleOpenDoctorAppointment = () => {
+        setOpenDoctorAppointment(!openDoctorAppointment);
+    };
+
+    const toggleOpenAskQuestion = () => {
+        setOpenAskQuestion(!openAskQuestion);
     };
 
     return (
@@ -100,7 +119,7 @@ export const Home = () => {
                             >
                                 Замовити дзвінок
                             </button>
-                            {openOrderCall && <OrderCall />}
+                            {openOrderCall && <OrderCall handleClose={toggleOpenOrderCall} />}
                         </div>
                     </div>
                 </nav>
@@ -116,7 +135,11 @@ export const Home = () => {
                                     гарантією гарантією високо результату. <br /> Допомагати ваші
                                     зуби-наша місія
                                 </p>
-                                <button className='header__sign-up' type='button'>
+                                <button
+                                    className='header__sign-up'
+                                    type='button'
+                                    onClick={toggleOpenDoctorAppointment}
+                                >
                                     Записатися
                                 </button>
                             </div>
@@ -127,6 +150,9 @@ export const Home = () => {
                         </div>
                     </div>
                     <img src={tools} alt='Інструменти' className='header__tools' />
+                    {openDoctorAppointment && (
+                        <DoctorAppointment handleClose={toggleOpenDoctorAppointment} />
+                    )}
                 </div>
             </header>
             <div className='guarantee'>
@@ -311,7 +337,11 @@ export const Home = () => {
                                 стоматологію, де головне - партнерські відносини з лікарем у
                                 вирішенні проблем.
                             </p>
-                            <button className='about-us__ask' type='button'>
+                            <button
+                                className='about-us__ask'
+                                type='button'
+                                onClick={toggleOpenAskQuestion}
+                            >
                                 Поставити запитання
                             </button>
                         </div>
@@ -320,6 +350,7 @@ export const Home = () => {
                         </div>
                     </div>
                 </div>
+                {openAskQuestion && <AskQuestion handleClose={toggleOpenAskQuestion} />}
             </div>
             <div className='doctors' id='doctors'>
                 <div className='container'>
