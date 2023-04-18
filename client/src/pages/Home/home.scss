@@ -1,78 +1,5 @@
 @import '../../variable.scss';
 
-.menu{
-    padding: 20px 0;
-
-    &__wrapper{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &__list{
-        display: flex;
-        justify-content: space-between;
-        list-style: none;
-        padding: 0;
-    }
-
-    &__item + &__item{
-        margin-left: 40px;
-    }
-
-    &__link{
-        color: $black;
-        text-decoration: none;
-    }
-
-    &__order-call{
-        @include button();
-    }
-}
-
-.header{
-    height: calc(100vh - 150px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-image: url("../../images/header-bg.jpg");
-    background-size: cover;
-
-    &__wrapper{
-        height: 100%;
-        position: relative;
-    }
-    .container{
-        height: 100%;
-    }
-
-    &__content{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 100%;
-    }
-
-    &__description{
-        @include text(16px, 400, 22px);
-        margin: 0 0 20px 0;
-    }
-
-    &__sign-up{
-        @include button;
-    }
-
-    &__girl{
-        position: relative;
-        height: 100%;
-    }
-
-    &__tools{
-        position: absolute;
-        bottom: -20%;
-        left: 8%;
-    }
-}
 
 .circle{
     width: 525px;
@@ -101,7 +28,7 @@
         @include text(16px, 400,24px);
         margin: 5px 0 0;
     }
-    
+
     .swiper-slide{
         position: relative;
         padding-top: 10px;
@@ -182,7 +109,7 @@
     background-repeat: no-repeat;
     background-position: 0 0, 0 100%;
     background-size: auto, 100%;
-    
+
 
     &__description{
         @include text(16px, 400, 24px);
@@ -204,7 +131,7 @@
         height: 40px;
         border-radius: 10px;
 
-        
+
 
         th{
             @include text(16px, 800, 20px);
@@ -355,8 +282,6 @@
 
     &__img{
         border-radius: 10px;
-        width: 100%;
-        height: auto;
     }
 
     &__name{
@@ -510,39 +435,3 @@
     }
 }
 
-.footer{
-    background-color: $dark-blue;
-    padding: 30px 0;
-
-    &__wrapper{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &__phone, &__email, &__address{
-        a,p{
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            @include text(14px, 500, 18px);
-
-            &:first-child{
-                margin-bottom: 10px;
-            }
-        }
-    }
-
-    &__social{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        a + a{
-            margin-left: 10px;
-        }
-    }
-
-    &__order-call{
-        @include button();
-    }
-}

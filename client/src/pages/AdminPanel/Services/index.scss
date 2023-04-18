@@ -1,0 +1,12 @@
+@import '../../../variable.scss';
+
+
+.services__controlls {
+  margin-top: 35px;
+  &-add {
+    @include button();
+    display: block;
+    width: 163px;
+    height: 35px;
+  }
+}

@@ -1,0 +1,12 @@
+@import '../../variable.scss';
+
+
+.reviews_item-controll {
+  &-remove {
+    @include button();
+    display: block;
+    width: 167px;
+    height: 39px;
+    margin-left: 40px;
+  }
+}
