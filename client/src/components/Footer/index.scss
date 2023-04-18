@@ -1,0 +1,38 @@
+@import '../../variable.scss';
+
+.footer{
+  background-color: $dark-blue;
+  padding: 30px 0;
+
+  &__wrapper{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  &__phone, &__email, &__address{
+      a,p{
+          display: block;
+          color: #fff;
+          text-decoration: none;
+          @include text(14px, 500, 18px);
+
+          &:first-child{
+              margin-bottom: 10px;
+          }
+      }
+  }
+
+  &__social{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      a + a{
+          margin-left: 10px;
+      }
+  }
+
+  &__order-call{
+      @include button();
+  }
+}
