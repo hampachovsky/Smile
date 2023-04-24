@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -20,23 +21,25 @@ import servicesIcon6 from '../../images/services_icon6.png';
 import servicesIcon7 from '../../images/services_icon7.png';
 import servicesIcon8 from '../../images/services_icon8.png';
 
-import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { fetchServices } from '../../store/slices/service/thunk';
+import { selectAllServices } from '../../store/slices/service/selectors';
 
 export const Home = () => {
+    const dispatch = useDispatch();
+    const services = useSelector(selectAllServices);
     const doctorsPrevRef = useRef(null);
     const doctorsNextRef = useRef(null);
     const reviewsPrevRef = useRef(null);
     const reviewsNextRef = useRef(null);
 
-    const service = {
-        service: 'Консультація лікаря-стоматолога',
-        price: '300',
-        currency: 'UAH',
-    };
-
     const [openLeaveReview, setOpenLeaveReview] = useState(false);
     const [openAskQuestion, setOpenAskQuestion] = useState(false);
+
+    useEffect(() => {
+        dispatch(fetchServices());
+    }, [dispatch]);
 
     const toggleOpenLeaveReview = () => {
         setOpenLeaveReview(!openLeaveReview);
@@ -174,14 +177,9 @@ export const Home = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
+                            {services.map((service) => (
+                                <PricesRow data={service} />
+                            ))}
                         </tbody>
                     </table>
                 </div>

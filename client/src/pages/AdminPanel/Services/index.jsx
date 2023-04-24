@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { PricesRow } from '../../../components';
 import { ServiceForm } from './components/ServiceForm';
 
@@ -6,7 +7,9 @@ import pencil from '../../../images/pencil.svg';
 import servicesIcon from '../../../images/services.svg';
 import trash from '../../../images/trash.svg';
 
+import { selectAllServices } from '../../../store/slices/service/selectors';
 import './index.scss';
+import { fetchServices } from '../../../store/slices/service/thunk';
 
 const serviceIcons = {
     icon1: pencil,
@@ -14,9 +17,15 @@ const serviceIcons = {
 };
 
 export const Services = () => {
+    const dispatch = useDispatch();
     const [isModalVisible, setModalVisibility] = useState(false);
     const [isEditable, setEditable] = useState(false);
     const [selectedService, setSelectedService] = useState(null);
+    const services = useSelector(selectAllServices);
+
+    useEffect(() => {
+        dispatch(fetchServices());
+    }, [dispatch]);
 
     const onCancel = useCallback(() => {
         setEditable(false);
@@ -33,12 +42,6 @@ export const Services = () => {
 
     const onAddService = () => {
         setModalVisibility(true);
-    };
-
-    const service = {
-        service: 'Консультація лікаря-стоматолога',
-        price: '300',
-        currency: 'UAH',
     };
 
     return (
@@ -58,36 +61,14 @@ export const Services = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <PricesRow
-                            data={service}
-                            onEdit={onEdit}
-                            isAdmin
-                            serviceIcons={serviceIcons}
-                        />
-                        <PricesRow
-                            data={service}
-                            onEdit={onEdit}
-                            isAdmin
-                            serviceIcons={serviceIcons}
-                        />
-                        <PricesRow
-                            data={service}
-                            onEdit={onEdit}
-                            isAdmin
-                            serviceIcons={serviceIcons}
-                        />
-                        <PricesRow
-                            data={service}
-                            onEdit={onEdit}
-                            isAdmin
-                            serviceIcons={serviceIcons}
-                        />
-                        <PricesRow
-                            data={service}
-                            onEdit={onEdit}
-                            isAdmin
-                            serviceIcons={serviceIcons}
-                        />
+                        {services.map((service) => (
+                            <PricesRow
+                                data={service}
+                                onEdit={onEdit}
+                                isAdmin
+                                serviceIcons={serviceIcons}
+                            />
+                        ))}
                     </tbody>
                 </table>
                 <div className='services__controlls'>
