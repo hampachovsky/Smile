@@ -178,7 +178,7 @@ export const Home = () => {
                         </thead>
                         <tbody>
                             {services.map((service) => (
-                                <PricesRow data={service} />
+                                <PricesRow key={service.id} data={service} />
                             ))}
                         </tbody>
                     </table>

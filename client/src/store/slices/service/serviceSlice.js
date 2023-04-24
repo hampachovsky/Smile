@@ -1,6 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { loadingStatus } from '../../../constants/loadingStatus';
-import { fetchServices } from './thunk';
+import { fetchCreateService, fetchDeleteService, fetchServices, fetchUpdateService } from './thunk';
 
 export const serviceAdapter = createEntityAdapter({
     selectId: (service) => service.id,
@@ -24,15 +24,61 @@ export const serviceSlice = createSlice({
             state.status = loadingStatus.LOADING;
             state.error = null;
         },
+        setSuccessStatus: (state) => {
+            state.status = loadingStatus.SUCCESS;
+            state.error = null;
+        },
+        setErrorStatus: (state, error) => {
+            state.status = loadingStatus.ERORR;
+            if (typeof error === 'string') {
+                state.error = error;
+            } else {
+                state.error = 'unknown error';
+            }
+        },
     },
     extraReducers: (builder) => {
+        builder.addCase(fetchServices.fulfilled, (state, payload) => {
+            serviceAdapter.setAll(state, payload);
+            serviceSlice.caseReducers.setSuccessStatus(state);
+        });
         builder.addCase(fetchServices.pending, (state) => {
             serviceSlice.caseReducers.setLoadingStatus(state);
         });
-        builder.addCase(fetchServices.fulfilled, serviceAdapter.upsertMany);
+        builder.addCase(fetchServices.rejected, (state, { payload }) => {
+            serviceSlice.caseReducers.setErrorStatus(state, payload);
+        });
+
+        builder.addCase(fetchCreateService.fulfilled, (state, payload) => {
+            serviceAdapter.addOne(state, payload);
+            serviceSlice.caseReducers.setSuccessStatus(state);
+        });
+        builder.addCase(fetchCreateService.pending, (state) => {
+            serviceSlice.caseReducers.setLoadingStatus(state);
+        });
+        builder.addCase(fetchCreateService.rejected, (state, { payload }) => {
+            serviceSlice.caseReducers.setErrorStatus(state, payload);
+        });
+
+        builder.addCase(fetchUpdateService.fulfilled, (state, payload) => {
+            serviceAdapter.setOne(state, payload);
+            serviceSlice.caseReducers.setSuccessStatus(state);
+        });
+        builder.addCase(fetchUpdateService.pending, (state) => {
+            serviceSlice.caseReducers.setLoadingStatus(state);
+        });
+        builder.addCase(fetchUpdateService.rejected, (state, { payload }) => {
+            serviceSlice.caseReducers.setErrorStatus(state, payload);
+        });
+
+        builder.addCase(fetchDeleteService.fulfilled, (state, payload) => {
+            serviceAdapter.removeOne(state, payload);
+            serviceSlice.caseReducers.setSuccessStatus(state);
+        });
+        builder.addCase(fetchDeleteService.pending, (state) => {
+            serviceSlice.caseReducers.setLoadingStatus(state);
+        });
     },
 });
-
-export const { increment } = serviceSlice.actions;
 
 export default serviceSlice.reducer;

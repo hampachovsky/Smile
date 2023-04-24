@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -10,20 +10,21 @@ import './index.scss';
 const valdiationSchema = yup
     .object({
         name: yup.string().required('Введыть назву'),
-        description: yup.string(),
+        description: yup.string().min(5, 'Довжина мінімум 5').required('Введіть опис'),
         price: yup
             .number('Ціна повинна бути числом')
             .positive('Число повинно бути більше 0')
-            .integer()
+            .integer('Ціна повинна бути числом')
             .required('Введіть ціну'),
         currency: yup.string().required('Введіть валюту'),
     })
     .required();
 
-export const ServiceForm = ({ isModalVisible, onCancel, isEditable }) => {
+export const ServiceForm = ({ isModalVisible, onCancel, isEditable, onSubmit, service }) => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isDirty, isValid, isSubmitting, isSubmitSuccessful },
     } = useForm({
         defaultValues: {
@@ -33,7 +34,22 @@ export const ServiceForm = ({ isModalVisible, onCancel, isEditable }) => {
             currency: '',
         },
         resolver: yupResolver(valdiationSchema),
+        mode: 'onBlur',
+        reValidateMode: 'onSubmit',
     });
+
+    useEffect(() => {
+        reset({
+            name: service?.name,
+            description: service?.description,
+            price: service?.price,
+            currency: service?.currency,
+        });
+    }, [service, reset]);
+
+    useEffect(() => {
+        reset();
+    }, [isSubmitSuccessful, reset]);
 
     return (
         isModalVisible && (
@@ -50,21 +66,24 @@ export const ServiceForm = ({ isModalVisible, onCancel, isEditable }) => {
                         {isEditable ? 'Редагувати послугу' : 'Створити послугу'}
                     </h2>
                     <form
-                        onSubmit={handleSubmit((data) => console.log(data))}
+                        onSubmit={handleSubmit((data) => onSubmit(data))}
                         className='service-form__form'
                     >
                         {errors.name?.message && (
                             <p className='error error__name'>{errors.name.message}</p>
                         )}
                         <input {...register('name')} placeholder='Введіть ім’я' />
+
                         {errors.description?.message && (
                             <p className='error error__description'>{errors.description.message}</p>
                         )}
                         <input {...register('description')} placeholder='Введіть опис' />
+
                         {errors.price?.message && (
                             <p className='error error__price'>{errors.price.message}</p>
                         )}
                         <input {...register('price')} placeholder='Введіть ціну' />
+
                         {errors.currency?.message && (
                             <p className='error error__currency'>{errors.currency.message}</p>
                         )}

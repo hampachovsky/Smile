@@ -9,8 +9,8 @@ export const serviceApi = {
         const response = await instance.post('/services', payload);
         return response.data;
     },
-    async update(id, payload) {
-        const response = await instance.put(`/services/${id}`, payload);
+    async update(payload) {
+        const response = await instance.put(`/services/${payload.id}`, payload);
         return response.data;
     },
     async delete(id) {

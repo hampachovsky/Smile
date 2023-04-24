@@ -1,6 +1,6 @@
 import './index.scss';
 
-export const PricesRow = ({ data, isAdmin, serviceIcons, onEdit }) => (
+export const PricesRow = ({ data, isAdmin, serviceIcons, onEdit, onDelete }) => (
     <tr className='prices__row'>
         <td className='prices__services'>{data.name}</td>
         <td className='prices__price'>{data.price}</td>
@@ -14,7 +14,7 @@ export const PricesRow = ({ data, isAdmin, serviceIcons, onEdit }) => (
                     className='prices__controlls-button'
                 />
                 <img
-                    onClick={() => console.log('TEST')}
+                    onClick={() => onDelete(data)}
                     src={serviceIcons.icon2}
                     alt='Видалити'
                     className='prices__controlls-button'

@@ -9,7 +9,12 @@ import trash from '../../../images/trash.svg';
 
 import { selectAllServices } from '../../../store/slices/service/selectors';
 import './index.scss';
-import { fetchServices } from '../../../store/slices/service/thunk';
+import {
+    fetchCreateService,
+    fetchDeleteService,
+    fetchServices,
+    fetchUpdateService,
+} from '../../../store/slices/service/thunk';
 
 const serviceIcons = {
     icon1: pencil,
@@ -40,6 +45,32 @@ export const Services = () => {
         setModalVisibility(true);
     }, []);
 
+    const onEditSubmit = useCallback(
+        (data) => {
+            const payload = { ...data, id: selectedService?.id };
+            dispatch(fetchUpdateService(payload));
+
+            setEditable(false);
+            setModalVisibility(false);
+        },
+        [dispatch, selectedService],
+    );
+
+    const onSubmit = useCallback(
+        (data) => {
+            dispatch(fetchCreateService(data));
+            setModalVisibility(false);
+        },
+        [dispatch],
+    );
+
+    const onServiceRemoval = useCallback(
+        (service) => {
+            dispatch(fetchDeleteService(service.id));
+        },
+        [dispatch],
+    );
+
     const onAddService = () => {
         setModalVisibility(true);
     };
@@ -63,8 +94,10 @@ export const Services = () => {
                     <tbody>
                         {services.map((service) => (
                             <PricesRow
+                                key={service.id}
                                 data={service}
                                 onEdit={onEdit}
+                                onDelete={onServiceRemoval}
                                 isAdmin
                                 serviceIcons={serviceIcons}
                             />
@@ -79,11 +112,22 @@ export const Services = () => {
                     >
                         Додати
                     </button>
-                    <ServiceForm
-                        isEditable={isEditable}
-                        isModalVisible={isModalVisible}
-                        onCancel={onCancel}
-                    />
+                    {isEditable && selectedService ? (
+                        <ServiceForm
+                            isEditable={isEditable}
+                            isModalVisible={isModalVisible}
+                            onSubmit={onEditSubmit}
+                            onCancel={onCancel}
+                            service={selectedService}
+                        />
+                    ) : (
+                        <ServiceForm
+                            isEditable={isEditable}
+                            isModalVisible={isModalVisible}
+                            onSubmit={onSubmit}
+                            onCancel={onCancel}
+                        />
+                    )}
                 </div>
             </div>
         </div>
