@@ -58,8 +58,9 @@ export const AdminPanel = () => {
                 </nav>
                 <div className='admin__content'>
                     {openBlock === 'services' ? (
-                        <Services />
-                    ) : openBlock === 'doctors' ? (
+                        <Reviews />
+                    ) : // <Services />
+                    openBlock === 'doctors' ? (
                         <Doctors />
                     ) : openBlock === 'offers' ? (
                         <Offers />
