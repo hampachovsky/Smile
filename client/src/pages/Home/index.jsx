@@ -25,10 +25,16 @@ import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { fetchServices } from '../../store/slices/service/thunk';
 import { selectAllServices } from '../../store/slices/service/selectors';
+import { fetchDoctors } from '../../store/slices/doctor/thunk';
+import { selectAllDoctors } from '../../store/slices/doctor/selectors';
+import { fetchOffers } from '../../store/slices/offer/thunk';
+import { selectAllOffers } from '../../store/slices/offer/selectors';
 
 export const Home = () => {
     const dispatch = useDispatch();
     const services = useSelector(selectAllServices);
+    const doctors = useSelector(selectAllDoctors);
+    const offers = useSelector(selectAllOffers);
     const doctorsPrevRef = useRef(null);
     const doctorsNextRef = useRef(null);
     const reviewsPrevRef = useRef(null);
@@ -39,6 +45,14 @@ export const Home = () => {
 
     useEffect(() => {
         dispatch(fetchServices());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchDoctors());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchOffers());
     }, [dispatch]);
 
     const toggleOpenLeaveReview = () => {
@@ -57,8 +71,16 @@ export const Home = () => {
                     <Swiper
                         modules={[Pagination]}
                         spaceBetween={50}
-                        slidesPerView={4}
+                        slidesPerView={1}
                         pagination={{ clickable: true }}
+                        breakpoints={{
+                            700: {
+                                slidesPerView: 3,
+                            },
+                            1000: {
+                                slidesPerView: 4,
+                            },
+                        }}
                     >
                         <SwiperSlide>
                             <h3 className='guarantee__title title3'>1 рік гарантії</h3>
@@ -190,21 +212,22 @@ export const Home = () => {
                     <Swiper
                         modules={[Pagination]}
                         spaceBetween={50}
-                        slidesPerView={4}
+                        slidesPerView={1}
                         pagination={{ clickable: true }}
+                        breakpoints={{
+                            700: {
+                                slidesPerView: 3,
+                            },
+                            1000: {
+                                slidesPerView: 4,
+                            },
+                        }}
                     >
-                        <SwiperSlide>
-                            <Offer />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Offer />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Offer />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Offer />
-                        </SwiperSlide>
+                        {offers.map((offer) => (
+                            <SwiperSlide>
+                                <Offer data={offer} />
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 </div>
             </div>
@@ -251,7 +274,7 @@ export const Home = () => {
                     <Swiper
                         modules={[Navigation]}
                         spaceBetween={50}
-                        slidesPerView={4}
+                        slidesPerView={1}
                         navigation={{
                             prevEl: doctorsPrevRef.current,
                             nextEl: doctorsNextRef.current,
@@ -265,22 +288,26 @@ export const Home = () => {
                                 swiper.navigation.update();
                             });
                         }}
+                        breakpoints={{
+                            768: {
+                                slidesPerView: 2.5,
+                            },
+                            900: {
+                                slidesPerView: 3,
+                            },
+                            1000: {
+                                slidesPerView: 3.5,
+                            },
+                            1200: {
+                                slidesPerView: 4,
+                            },
+                        }}
                     >
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
+                        {doctors.map((doctor) => (
+                            <SwiperSlide>
+                                <Doctor data={doctor} />
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                     <div className='doctors__left' ref={doctorsPrevRef} />
                     <div className='doctors__right' ref={doctorsNextRef} />

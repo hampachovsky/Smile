@@ -36,3 +36,25 @@
       @include button();
   }
 }
+
+@media screen and (max-width: 1000px){
+    .footer{
+        &__wrapper{
+            flex-wrap: wrap;
+            align-items: center;
+            div{
+                width: 25%;
+            }
+        }
+
+        &__social{
+            width: 25%;
+            margin-top: 10px;
+        }
+
+        &__order-call{
+            width: 25%;
+            margin-top: 10px;
+        }
+    }
+}

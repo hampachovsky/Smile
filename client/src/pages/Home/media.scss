@@ -1,0 +1,28 @@
+
+@media screen and (max-width: 1400px){
+    .doctors{
+        .swiper{
+            width: calc(100% - 120px);
+        }
+
+        &__left{
+            left: 10px;
+        }
+    
+        &__right{
+            right: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .reviews{
+        &__swiper{
+            width: 50%;
+        }
+
+        &__girl{
+            width: 45%;
+        }
+    }
+}
