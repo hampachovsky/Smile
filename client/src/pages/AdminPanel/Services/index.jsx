@@ -37,8 +37,6 @@ export const Services = () => {
         setModalVisibility(false);
     }, []);
 
-    // TODO: ON `PriceRow` component use onEdit, where select servcie and pass them to edit form.
-
     const onEdit = useCallback((service) => {
         setSelectedService(service);
         setEditable(true);

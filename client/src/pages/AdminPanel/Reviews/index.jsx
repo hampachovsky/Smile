@@ -1,14 +1,34 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Review } from '../../../components';
 import './index.scss';
 
 import reviewsIcon from '../../../images/reviews.svg';
+import { selectAllReviews } from '../../../store/slices/review/selectors';
+import { fetchReviews } from '../../../store/slices/review/thunk';
 
 export const Reviews = () => {
+    const dispatch = useDispatch();
     const reviewsPrevRef = useRef(null);
     const reviewsNextRef = useRef(null);
+    const reviews = useSelector(selectAllReviews);
+
+    useEffect(() => {
+        dispatch(fetchReviews());
+    }, [dispatch]);
+
+    const twoElementsArray = [];
+
+    for (let i = 0; i < reviews.length; i += 2) {
+        twoElementsArray.push(
+            <SwiperSlide key={i}>
+                <Review review={reviews[i]} isAdmin />
+                {reviews[i + 1] && <Review review={reviews[i + 1]} isAdmin />}
+            </SwiperSlide>,
+        );
+    }
 
     return (
         <div className='admin-review' id='reviews'>
@@ -37,14 +57,7 @@ export const Reviews = () => {
                                 });
                             }}
                         >
-                            <SwiperSlide>
-                                <Review isAdmin />
-                                <Review isAdmin />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Review isAdmin />
-                                <Review isAdmin />
-                            </SwiperSlide>
+                            {twoElementsArray}
                         </Swiper>
                     </div>
                 </div>

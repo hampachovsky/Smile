@@ -25,27 +25,36 @@ import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { fetchServices } from '../../store/slices/service/thunk';
 import { selectAllServices } from '../../store/slices/service/selectors';
+
 import { fetchDoctors } from '../../store/slices/doctor/thunk';
 import { selectAllDoctors } from '../../store/slices/doctor/selectors';
 import { fetchOffers } from '../../store/slices/offer/thunk';
 import { selectAllOffers } from '../../store/slices/offer/selectors';
+
+import { selectAllReviews } from '../../store/slices/review/selectors';
+import { fetchReviews } from '../../store/slices/review/thunk';
+
 
 export const Home = () => {
     const dispatch = useDispatch();
     const services = useSelector(selectAllServices);
     const doctors = useSelector(selectAllDoctors);
     const offers = useSelector(selectAllOffers);
+    const reviews = useSelector(selectAllReviews);
+
     const doctorsPrevRef = useRef(null);
     const doctorsNextRef = useRef(null);
     const reviewsPrevRef = useRef(null);
     const reviewsNextRef = useRef(null);
 
-    const [openLeaveReview, setOpenLeaveReview] = useState(false);
-    const [openAskQuestion, setOpenAskQuestion] = useState(false);
+    useEffect(() => {
+        dispatch(fetchReviews());
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(fetchServices());
     }, [dispatch]);
+
 
     useEffect(() => {
         dispatch(fetchDoctors());
@@ -54,6 +63,21 @@ export const Home = () => {
     useEffect(() => {
         dispatch(fetchOffers());
     }, [dispatch]);
+
+    const twoElementsArray = [];
+
+    for (let i = 0; i < reviews.length; i += 2) {
+        twoElementsArray.push(
+            <SwiperSlide key={i}>
+                <Review review={reviews[i]} />
+                {reviews[i + 1] && <Review review={reviews[i + 1]} />}
+            </SwiperSlide>,
+        );
+    }
+
+    const [openLeaveReview, setOpenLeaveReview] = useState(false);
+    const [openAskQuestion, setOpenAskQuestion] = useState(false);
+
 
     const toggleOpenLeaveReview = () => {
         setOpenLeaveReview(!openLeaveReview);
@@ -338,14 +362,7 @@ export const Home = () => {
                                     });
                                 }}
                             >
-                                <SwiperSlide>
-                                    <Review />
-                                    <Review />
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <Review />
-                                    <Review />
-                                </SwiperSlide>
+                                {twoElementsArray}
                             </Swiper>
                             <div className='reviews__navigation'>
                                 <div className='reviews__left' ref={reviewsPrevRef} />

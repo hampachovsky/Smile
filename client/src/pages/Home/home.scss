@@ -1,3 +1,4 @@
+
 @import '../../variable.scss';
 
 
@@ -440,4 +441,444 @@
 }
 
 @import './media.scss';
+
+
+@import '../../variable.scss';
+
+
+.circle{
+    width: 525px;
+    height: 525px;
+    background-color: $orange;
+    border-radius: 100%;
+    position: relative;
+    bottom: -40%;
+}
+
+.girl{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.guarantee{
+    background-color: #fff;
+    position: relative;
+    background-image: url("../../images/guarantee-bg.jpg");
+    background-size: 100% 100%;
+    padding: 50px 0;
+
+    &__description{
+        @include text(16px, 400,24px);
+        margin: 5px 0 0;
+    }
+
+    .swiper-slide{
+        position: relative;
+        padding-top: 10px;
+        transform-style: preserve-3d;
+    }
+
+    @for $i from 1 through 4 {
+
+        .swiper-slide:nth-child(#{$i})::before {
+            content: '0'+#{$i};
+            position: absolute;
+            top:-3px;
+            left: -30px;
+            @include text(40px, 800, 40px);
+            color: $light-blue;
+            transform: translateZ(-1px);
+        }
+    }
+}
+
+.services{
+    position: relative;
+    padding: 50px 0;
+
+    background-image: url("../../images/services-bg-top.svg"), url("../../images/services-bg-bottom.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 0 0, 0 100%;
+
+    &__title{
+        margin-bottom: 50px;
+    }
+
+    &__wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__item{
+        width: 22%;
+        margin-bottom: 50px;
+        position: relative;
+        transform-style: preserve-3d;
+        &::before{
+            content: '';
+            position: absolute;
+            top:0;
+            left:-20px;
+            width: 40px;
+            height: 40px;
+            background-color: $light-blue;
+            border-radius: 100%;
+            transform: translateZ(-1px);
+        }
+    }
+
+    &__img{
+        margin-bottom: 5px;
+    }
+
+    &__subtitle{
+        color: $blue;
+        margin-bottom: 5px;
+    }
+
+    &__description{
+        @include text(16px, 400, 24px);
+        color: #A8A9BE;
+        margin: 0;
+    }
+}
+
+.prices{
+    padding: 50px 0 70px 0;
+    background-image: url("../../images/prices-bg-top.svg"), url("../../images/prices-bg-bottom.svg");
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 100%;
+    background-size: auto, 100%;
+
+
+    &__description{
+        @include text(16px, 400, 24px);
+        color: #C3C4D2;
+        width: 80%;
+        margin: 5px 0 0 0;
+    }
+
+    &__table{
+        width: 100%;
+        margin-top: 30px;
+        border: none;
+        border-spacing: 0;
+        border-radius: 10px;
+    }
+
+    &__caption{
+        background-color: #EBF3FF;
+        height: 40px;
+        border-radius: 10px;
+
+
+
+        th{
+            @include text(16px, 800, 20px);
+            color: $blue;
+            text-align: left;
+            &:first-child{
+                border-radius: 10px 0 0;
+                padding: 0 12px 0;
+                width: 80%;
+            }
+            &:last-child{
+                border-radius: 0 10px 0 0;
+                width: 10%;
+            }
+        }
+    }
+
+    &__row{
+        height: 40px;
+
+        &:nth-child(2n){
+            background-color: #F6F6F6;
+        }
+
+        td{
+            @include text(14px, 600, 16px);
+            &:first-child{
+                padding: 0 12px 0;
+            }
+        }
+    }
+}
+
+.offers{
+    padding: 20px 0 50px 0;
+    background-image: url('../../images/dots.png');
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+
+    &__title{
+        margin-bottom: 25px;
+    }
+
+    &__img{
+        border-radius: 10px;
+        width: 100%;
+        height: auto;
+    }
+
+    &__subtitle{
+        @include text(16px, 600, 20px);
+        margin: 5px 0;
+        color: $blue;
+    }
+
+    &__description{
+        @include text(14px, 400, 18px);
+        margin: 10px 0 0;
+    }
+}
+
+
+.about-us{
+    padding: 50px 0 100px;
+    background-image: url('../../images/about-us-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    &__wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__anchor{
+        @include text(14px, 600, 18px);
+        color: $blue;
+        margin-bottom: 15px;
+    }
+
+    &__text{
+        @include text(16px, 400, 22px);
+    }
+
+    &__content{
+        width: 40%;
+    }
+
+    &__ask{
+        @include button();
+    }
+
+    &__block-img{
+        width: 45%;
+        transform-style: preserve-3d;
+        position: relative;
+
+        &:before{
+            position:absolute;
+            content: '';
+            width: 115px;
+            height: 115px;
+            top: -10px;
+            left: -55px;
+            background-color: #FFE7DB;
+            transform: translateZ(-1px);
+            border-radius: 100%;
+        }
+
+        &:after{
+            position:absolute;
+            content: '';
+            width: 35px;
+            height: 35px;
+            top: 10px;
+            left: -30px;
+            transform: translateZ(-1px);
+            background-color: #FFE7DB;
+            background-image: url('../../images/teeth.png');
+            background-size: cover;
+            background-blend-mode:overlay;
+        }
+    }
+
+    &__img{
+        width: 100%;
+        height: auto;
+        border-radius: 80px;
+    }
+}
+
+.doctors{
+    padding: 50px 0;
+
+    .container{
+        position: relative;
+    }
+
+    &__anchor{
+        @include text(14px, 600, 18px);
+        color: $blue;
+        margin-bottom: 15px;
+    }
+
+    &__title{
+        margin-bottom: 30px;
+    }
+
+    &__img{
+        border-radius: 10px;
+    }
+
+    &__name{
+        color: $blue;
+        margin: 5px 0;
+    }
+
+    &__experience, &__specialization{
+        @include text(14px, 400, 18px);
+        margin: 5px 0;
+
+        span{
+            font-weight: 700;
+            margin: 0;
+        }
+    }
+
+    &__left, &__right{
+        width: 40px;
+        height: 40px;
+        background-color: $blue;
+        border-radius: 100%;
+        position: absolute;
+        background-image: url('../../images/arrow.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+    }
+
+    &__left{
+        left: -75px;
+        top: 50%;
+    }
+
+    &__right{
+        right: -75px;
+        top: 50%;
+        transform: rotate(180deg);
+    }
+}
+
+.reviews{
+    padding: 50px 0 0 0;
+    background-image: url('../../images/reviews-bg.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+
+    &__wrapper{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__anchor{
+        @include text(14px, 600, 18px);
+        color: $blue;
+        margin-bottom: 15px;
+    }
+
+    &__title{
+        margin-bottom: 30px;
+    }
+
+    &__swiper{
+        width: 40%;
+        margin: 0;
+    }
+
+    &__item{
+        background-color: #C9DEFF;
+        border-radius: 30px;
+        padding: 10px 30px;
+        width: 70%;
+
+        &:first-child{
+            margin-bottom: 30px;
+        }
+    }
+
+    &__info{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__user-name{
+        @include text(16px, 700, 22px);
+        color: $dark-blue;
+        margin: 0;
+    }
+
+    &__date{
+        @include text(14px, 400, 20px);
+        color: #A8A9BE;
+        margin: 0;
+    }
+
+    &__content{
+        @include text(16px, 600, 22px);
+        margin: 10px 0;
+    }
+
+    &__leave{
+        @include button();
+        display: block;
+    }
+
+    &__girl{
+        width: 50%;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__img{
+        width: 100%;
+        height: auto;
+    }
+
+    &__navigation{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 30px 0 50px;
+    }
+
+    &__left, &__right{
+        width: 40px;
+        height: 40px;
+        background-color: $blue;
+        border-radius: 100%;
+        background-image: url('../../images/arrow.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+    }
+
+    &__right{
+        transform: rotate(180deg);
+    }
+}
+
+.map{
+    width: 100%;
+    height: 300px;
+
+    iframe{
+        width: 100%;
+        height: 300px;
+    }
+
+    .place-card-medium{
+        display: none !important;
+    }
+}
+
 
