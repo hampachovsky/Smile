@@ -1,8 +1,8 @@
 import './edit.scss';
 
-export const Edit = () => (
+export const Edit = ({ data, remove, edit }) => (
     <div className='edit'>
-        <button className='edit__button' type='button'>
+        <button className='edit__button' type='button' onClick={() => edit(data)}>
             <svg
                 width='25'
                 height='25'
@@ -26,7 +26,7 @@ export const Edit = () => (
                 />
             </svg>
         </button>
-        <button className='delete__button' type='button'>
+        <button className='delete__button' type='button' onClick={() => remove(data)}>
             <svg
                 width='25'
                 height='25'

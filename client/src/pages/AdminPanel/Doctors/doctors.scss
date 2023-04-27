@@ -31,6 +31,12 @@
 
         &-lable{
             position: relative;
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            
             img{
                 display: block;
                 width: 100%;
@@ -81,5 +87,10 @@
         padding: 5px 10px;
         color: $white;
         border-radius: 10px;
+    }
+
+    &__img{
+        width: 100%;
+        height: auto;
     }
 }

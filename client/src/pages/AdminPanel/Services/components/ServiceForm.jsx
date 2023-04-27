@@ -25,7 +25,7 @@ export const ServiceForm = ({ isModalVisible, onCancel, isEditable, onSubmit, se
         register,
         handleSubmit,
         reset,
-        formState: { errors, isDirty, isValid, isSubmitting, isSubmitSuccessful },
+        formState: { errors, isSubmitSuccessful },
     } = useForm({
         defaultValues: {
             name: '',
