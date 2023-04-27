@@ -9,8 +9,7 @@ const rootReducer = combineReducers({
     doctorReducer,
     offerReducer,
     reviewReducer,
-
-
+});
 
 export const store = configureStore({
     reducer: rootReducer,

@@ -34,7 +34,6 @@ import { selectAllOffers } from '../../store/slices/offer/selectors';
 import { selectAllReviews } from '../../store/slices/review/selectors';
 import { fetchReviews } from '../../store/slices/review/thunk';
 
-
 export const Home = () => {
     const dispatch = useDispatch();
     const services = useSelector(selectAllServices);
@@ -54,7 +53,6 @@ export const Home = () => {
     useEffect(() => {
         dispatch(fetchServices());
     }, [dispatch]);
-
 
     useEffect(() => {
         dispatch(fetchDoctors());
@@ -77,7 +75,6 @@ export const Home = () => {
 
     const [openLeaveReview, setOpenLeaveReview] = useState(false);
     const [openAskQuestion, setOpenAskQuestion] = useState(false);
-
 
     const toggleOpenLeaveReview = () => {
         setOpenLeaveReview(!openLeaveReview);
