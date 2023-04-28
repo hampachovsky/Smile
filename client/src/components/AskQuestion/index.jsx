@@ -1,5 +1,4 @@
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
@@ -8,6 +7,7 @@ import InputMask from 'react-input-mask';
 
 import close from '../../images/close.svg';
 import './index.scss';
+import { mailerApi } from '../../api/mailerApi';
 
 export const AskQuestion = ({ handleClose }) => {
     const {
@@ -17,9 +17,19 @@ export const AskQuestion = ({ handleClose }) => {
     } = useForm();
 
     const [phone, setPhone] = useState(false);
-    console.log(phone);
+
     const onChange = (event) => {
         setPhone(event.target.value);
+    };
+
+    const onSubmit = (data) => {
+        const payload = {
+            to: 'smile@example.com',
+            subject: 'Питання про клініку',
+            body: `Від: ${data.name}. \n Номер Телефону: ${phone} \n Питання: ${data.question}`,
+        };
+        mailerApi.askQuestion(payload);
+        handleClose();
     };
 
     return (
@@ -32,7 +42,10 @@ export const AskQuestion = ({ handleClose }) => {
                 <p className='ask-question__description'>
                     Відповімо на будь-яке питання про сервіс та лікування у нашій стоматології.
                 </p>
-                <form onSubmit={handleSubmit((data) => data)} className='ask-question__form'>
+                <form
+                    onSubmit={handleSubmit((data) => onSubmit(data))}
+                    className='ask-question__form'
+                >
                     <input {...register('name', { required: true })} placeholder='Введіть ім’я' />
                     {errors.name && <p className='error error__name'>Введіть ваше ім’я</p>}
                     <PhoneNumber onChange={onChange} value={phone} />
