@@ -9,6 +9,7 @@ import InputMask from 'react-input-mask';
 
 import close from '../../images/close.svg';
 import './index.scss';
+import { mailerApi } from '../../api/mailerApi';
 
 export const OrderCall = ({ handleClose }) => {
     const {
@@ -18,9 +19,18 @@ export const OrderCall = ({ handleClose }) => {
     } = useForm();
 
     const [phone, setPhone] = useState(false);
-    console.log(phone);
     const onChange = (event) => {
         setPhone(event.target.value);
+    };
+
+    const onSubmit = (data) => {
+        const payload = {
+            to: 'smile@example.com',
+            subject: 'Замовлення дзвінку',
+            body: `Від: ${data.name}. \n Номер Телефону: ${phone} `,
+        };
+        mailerApi.askQuestion(payload);
+        handleClose();
     };
 
     return (
@@ -33,7 +43,10 @@ export const OrderCall = ({ handleClose }) => {
                 <p className='order-call__description'>
                     Відповімо на будь-яке питання про лікування та запишемо до фахівця на прийом
                 </p>
-                <form onSubmit={handleSubmit((data) => data)} className='order-call__form'>
+                <form
+                    onSubmit={handleSubmit((data) => onSubmit(data))}
+                    className='order-call__form'
+                >
                     <input {...register('name', { required: true })} placeholder='Введіть ім’я' />
                     {errors.name && <p className='error error__name'>Введіть ваше ім’я</p>}
                     <PhoneNumber onChange={onChange} value={phone} />

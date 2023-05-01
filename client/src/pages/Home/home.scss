@@ -1,8 +1,6 @@
 @import '../../variable.scss';
 
 
-
-
 .guarantee{
     background-color: #fff;
     position: relative;
@@ -11,7 +9,7 @@
     padding: 50px 0 20px;
 
     &__description{
-        @include text(16px, 400,24px);
+        @include simpleText();
         margin: 5px 0 0;
     }
 
@@ -60,7 +58,6 @@
     &__wrapper{
         display: flex;
         justify-content: space-between;
-        align-items: center;
         flex-wrap: wrap;
     }
 
@@ -92,7 +89,7 @@
     }
 
     &__description{
-        @include text(16px, 400, 24px);
+        @include simpleText();
         color: #A8A9BE;
         margin: 0;
     }
@@ -107,7 +104,7 @@
 
 
     &__description{
-        @include text(16px, 400, 24px);
+        @include simpleText();
         color: #C3C4D2;
         width: 80%;
         margin: 5px 0 0 0;
@@ -129,9 +126,10 @@
 
 
         th{
-            @include text(16px, 800, 20px);
+            @include simpleText();
             color: $blue;
             text-align: left;
+            font-weight: 700;
             &:first-child{
                 border-radius: 10px 0 0;
                 padding: 0 12px 0;
@@ -177,7 +175,7 @@
     }
 
     &__subtitle{
-        @include text(16px, 600, 20px);
+        @include simpleText();
         margin: 5px 0;
         color: $blue;
     }
@@ -217,7 +215,7 @@
     }
 
     &__text{
-        @include text(16px, 400, 22px);
+        @include simpleText();
     }
 
     &__content{
@@ -370,7 +368,7 @@
     }
 
     &__user-name{
-        @include text(16px, 700, 22px);
+        @include simpleText();
         color: $dark-blue;
         margin: 0;
     }
@@ -382,7 +380,7 @@
     }
 
     &__content{
-        @include text(16px, 600, 22px);
+        @include simpleText();
         margin: 10px 0;
     }
 
@@ -439,5 +437,37 @@
     }
 }
 
-@import './media.scss';
 
+.guarantee{
+    background-color: #fff;
+    position: relative;
+    background-image: url("../../images/guarantee-bg.jpg");
+    background-size: 100% 100%;
+    padding: 50px 0;
+
+    &__description{
+        @include simpleText();
+        margin: 5px 0 0;
+    }
+
+    .swiper-slide{
+        position: relative;
+        padding-top: 10px;
+        transform-style: preserve-3d;
+    }
+
+    @for $i from 1 through 4 {
+
+        .swiper-slide:nth-child(#{$i})::before {
+            content: '0'+#{$i};
+            position: absolute;
+            top:-3px;
+            left: -30px;
+            @include text(40px, 800, 40px);
+            color: $light-blue;
+            transform: translateZ(-1px);
+        }
+    }
+}
+
+@import './media.scss';

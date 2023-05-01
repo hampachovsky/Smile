@@ -34,3 +34,12 @@ $light-blue: #EBF3FF;
     transform: translateZ(-1px);
     border-radius:100%;
 }
+
+@mixin simpleText(){
+    @include text(16px, 400, 24px);
+
+    @media screen and (max-width: 650px){
+        @include text(14px, 400, 22px); 
+    }
+
+}

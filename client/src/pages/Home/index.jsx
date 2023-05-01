@@ -29,19 +29,24 @@ import { fetchDoctors } from '../../store/slices/doctor/thunk';
 import { selectAllDoctors } from '../../store/slices/doctor/selectors';
 import { fetchOffers } from '../../store/slices/offer/thunk';
 import { selectAllOffers } from '../../store/slices/offer/selectors';
+import { selectAllReviews } from '../../store/slices/review/selectors';
+import { fetchReviews } from '../../store/slices/review/thunk';
 
 export const Home = () => {
     const dispatch = useDispatch();
     const services = useSelector(selectAllServices);
     const doctors = useSelector(selectAllDoctors);
     const offers = useSelector(selectAllOffers);
+    const reviews = useSelector(selectAllReviews);
+
     const doctorsPrevRef = useRef(null);
     const doctorsNextRef = useRef(null);
     const reviewsPrevRef = useRef(null);
     const reviewsNextRef = useRef(null);
 
-    const [openLeaveReview, setOpenLeaveReview] = useState(false);
-    const [openAskQuestion, setOpenAskQuestion] = useState(false);
+    useEffect(() => {
+        dispatch(fetchReviews());
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(fetchServices());
@@ -54,6 +59,20 @@ export const Home = () => {
     useEffect(() => {
         dispatch(fetchOffers());
     }, [dispatch]);
+
+    const twoElementsArray = [];
+
+    for (let i = 0; i < reviews.length; i += 2) {
+        twoElementsArray.push(
+            <SwiperSlide key={i}>
+                <Review review={reviews[i]} />
+                {reviews[i + 1] && <Review review={reviews[i + 1]} />}
+            </SwiperSlide>,
+        );
+    }
+
+    const [openLeaveReview, setOpenLeaveReview] = useState(false);
+    const [openAskQuestion, setOpenAskQuestion] = useState(false);
 
     const toggleOpenLeaveReview = () => {
         setOpenLeaveReview(!openLeaveReview);
@@ -74,6 +93,12 @@ export const Home = () => {
                         slidesPerView={1}
                         pagination={{ clickable: true }}
                         breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 2,
+                            },
                             700: {
                                 slidesPerView: 3,
                             },
@@ -215,6 +240,12 @@ export const Home = () => {
                         slidesPerView={1}
                         pagination={{ clickable: true }}
                         breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 2,
+                            },
                             700: {
                                 slidesPerView: 3,
                             },
@@ -224,7 +255,7 @@ export const Home = () => {
                         }}
                     >
                         {offers.map((offer) => (
-                            <SwiperSlide>
+                            <SwiperSlide key={offer.id}>
                                 <Offer data={offer} />
                             </SwiperSlide>
                         ))}
@@ -289,6 +320,15 @@ export const Home = () => {
                             });
                         }}
                         breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 1.5,
+                            },
+                            600: {
+                                slidesPerView: 2,
+                            },
                             768: {
                                 slidesPerView: 2.5,
                             },
@@ -304,7 +344,7 @@ export const Home = () => {
                         }}
                     >
                         {doctors.map((doctor) => (
-                            <SwiperSlide>
+                            <SwiperSlide key={doctor.id}>
                                 <Doctor data={doctor} />
                             </SwiperSlide>
                         ))}
@@ -338,14 +378,7 @@ export const Home = () => {
                                     });
                                 }}
                             >
-                                <SwiperSlide>
-                                    <Review />
-                                    <Review />
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <Review />
-                                    <Review />
-                                </SwiperSlide>
+                                {twoElementsArray}
                             </Swiper>
                             <div className='reviews__navigation'>
                                 <div className='reviews__left' ref={reviewsPrevRef} />

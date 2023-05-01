@@ -16,6 +16,10 @@
         @include popup__before();
     }
 
+    &__description{
+        @include simpleText();
+    }
+
     &__close{
         position: relative;
         left: calc(100% - 16px);
@@ -91,12 +95,48 @@
 
         label{
             width: 100%;
+            @include simpleText();
         }
     }
 
     &__submit{
         @include button();
         margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 1100px){
+    .leave-review{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .leave-review{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .leave-review{
+        &__description{
+            margin: 5px 0;
+        }
+        &__form{
+            margin-top: 10px;
+        }
+
+        &__agree-block{
+            margin-top: 15px;
+        }
+
+        label{
+            font-size: 12px;
+            line-height: 15px;
+        }
+        input::placeholder{
+            font-size: 14px;
+        }
     }
 }
 

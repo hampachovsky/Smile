@@ -8,6 +8,7 @@ import InputMask from 'react-input-mask';
 
 import close from '../../images/close.svg';
 import './index.scss';
+import { mailerApi } from '../../api/mailerApi';
 
 export const DoctorAppointment = ({ handleClose }) => {
     const {
@@ -17,9 +18,19 @@ export const DoctorAppointment = ({ handleClose }) => {
     } = useForm();
 
     const [phone, setPhone] = useState(false);
-    console.log(phone);
     const onChange = (event) => {
         setPhone(event.target.value);
+    };
+    const onSubmit = (data) => {
+        const payload = {
+            to: 'smile@example.com',
+            subject: 'Запис на прийом до лікаря',
+            body: `Від: ${data.name}. \n Номер Телефону: ${phone} \n ${
+                data.time !== '' ? `Бажаний час прийому: ${data.time}` : ''
+            }`,
+        };
+        mailerApi.askQuestion(payload);
+        handleClose();
     };
 
     return (
@@ -28,11 +39,14 @@ export const DoctorAppointment = ({ handleClose }) => {
                 <button className='doctor-appointment__close' onClick={handleClose} type='button'>
                     <img src={close} alt='Закрити' />
                 </button>
-                <h2 className='doctor-appointment__title title2'>Залишити відгук</h2>
+                <h2 className='doctor-appointment__title title2'>Записатись на прийом</h2>
                 <p className='doctor-appointment__description'>
                     Підберемо відповідний час і підкажемо точну вартість лікування
                 </p>
-                <form onSubmit={handleSubmit((data) => data)} className='doctor-appointment__form'>
+                <form
+                    onSubmit={handleSubmit((data) => onSubmit(data))}
+                    className='doctor-appointment__form'
+                >
                     <input {...register('name', { required: true })} placeholder='Введіть ім’я' />
                     {errors.name && <p className='error error__name'>Введіть ваше ім’я</p>}
                     <PhoneNumber onChange={onChange} value={phone} />

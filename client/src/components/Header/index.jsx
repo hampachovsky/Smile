@@ -241,7 +241,7 @@ export const Header = () => {
             <div className='header__wrapper'>
                 <div className='container'>
                     <div className='header__content'>
-                        <div>
+                        <div className='header__info'>
                             <h1 className='header__title title1'>
                                 Довірте свою посмішку професіоналам
                             </h1>
@@ -259,7 +259,6 @@ export const Header = () => {
                             </button>
                         </div>
                         <div className='header__girl'>
-                            <div className='circle'></div>
                             <img src={girl} alt='Дівчина' className='girl' />
                         </div>
                     </div>

@@ -32,6 +32,7 @@ export const Doctors = () => {
     const onSubmit = (data) => {
         data.photo = isImage;
         dispatch(fetchCreateDoctor(data));
+        setImage(null);
     };
 
     const onDoctorRemoval = useCallback(
