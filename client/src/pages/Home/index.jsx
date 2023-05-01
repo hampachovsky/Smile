@@ -25,12 +25,10 @@ import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
 import { fetchServices } from '../../store/slices/service/thunk';
 import { selectAllServices } from '../../store/slices/service/selectors';
-
 import { fetchDoctors } from '../../store/slices/doctor/thunk';
 import { selectAllDoctors } from '../../store/slices/doctor/selectors';
 import { fetchOffers } from '../../store/slices/offer/thunk';
 import { selectAllOffers } from '../../store/slices/offer/selectors';
-
 import { selectAllReviews } from '../../store/slices/review/selectors';
 import { fetchReviews } from '../../store/slices/review/thunk';
 
@@ -95,6 +93,12 @@ export const Home = () => {
                         slidesPerView={1}
                         pagination={{ clickable: true }}
                         breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 2,
+                            },
                             700: {
                                 slidesPerView: 3,
                             },
@@ -236,6 +240,12 @@ export const Home = () => {
                         slidesPerView={1}
                         pagination={{ clickable: true }}
                         breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 2,
+                            },
                             700: {
                                 slidesPerView: 3,
                             },
@@ -245,7 +255,7 @@ export const Home = () => {
                         }}
                     >
                         {offers.map((offer) => (
-                            <SwiperSlide>
+                            <SwiperSlide key={offer.id}>
                                 <Offer data={offer} />
                             </SwiperSlide>
                         ))}
@@ -310,6 +320,15 @@ export const Home = () => {
                             });
                         }}
                         breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 1.5,
+                            },
+                            600: {
+                                slidesPerView: 2,
+                            },
                             768: {
                                 slidesPerView: 2.5,
                             },
@@ -325,7 +344,7 @@ export const Home = () => {
                         }}
                     >
                         {doctors.map((doctor) => (
-                            <SwiperSlide>
+                            <SwiperSlide key={doctor.id}>
                                 <Doctor data={doctor} />
                             </SwiperSlide>
                         ))}

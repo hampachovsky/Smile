@@ -1,17 +1,33 @@
-.admin-review {
-  padding: 70px 0 0 70px;
-  display: flex;
-  justify-content: center;
+.admin-reviews {
+  margin-top: 80px;
 
+  &__swiper {
+    width: 100%;
+  }
+
+  .reviews__content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+  }
 }
-
-
 
 .title_icon {
   margin-right: 10px;
 }
 
 
-.admin-reviews__swiper {
-  width: 100%;
+
+@media screen and (max-width: 500px){
+  .admin-reviews{
+    .reviews__content{
+      display: block;
+
+      .reviews_item-controll-remove{
+        margin: 0 auto;
+      }
+    }
+  }
 }
+

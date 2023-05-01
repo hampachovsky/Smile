@@ -18,7 +18,7 @@
 }
 
 .title2{
-    @include text(26px, 800, 32px); 
+    @include text(26px, 800, 32px);
     margin: 0
 }
 
@@ -40,5 +40,42 @@
 body{
     &.hidden{
         overflow: hidden;
+    }
+}
+
+
+@media screen and (max-width: 768px){
+    .title1{
+        @include text(32px, 600, 40px);
+        text-transform: uppercase;
+        margin: 0 0 20px 0;
+    }
+
+    .title2{
+        @include text(24px, 800, 30px);
+        margin: 0
+    }
+
+    .title3{
+        @include text(18px, 700, 24px);
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .title1{
+        @include text(26px, 400, 36px);
+        text-transform: uppercase;
+        margin: 0 0 20px 0;
+    }
+
+    .title2{
+        @include text(22px, 800, 30px);
+        margin: 0
+    }
+
+    .title3{
+        @include text(16px, 700, 26px);
+        margin: 0;
     }
 }

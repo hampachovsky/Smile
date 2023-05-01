@@ -78,6 +78,19 @@ export const Doctors = () => {
         reset();
     }, [isSubmitSuccessful, reset]);
 
+    useEffect(() => {
+        reset({
+            fullName: selectedDoctor?.fullName,
+            experience: selectedDoctor?.experience,
+            specialization: selectedDoctor?.specialization,
+        });
+        setImage(selectedDoctor?.photo);
+    }, [selectedDoctor, reset]);
+
+    useEffect(() => {
+        reset();
+    }, [isSubmitSuccessful, reset]);
+
     const handleOnCompleted = (files) => {
         setImage(files[0].base64_file);
     };

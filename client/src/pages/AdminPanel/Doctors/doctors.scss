@@ -36,7 +36,8 @@
             height: auto;
             border-radius: 10px;
             cursor: pointer;
-            
+
+
             img{
                 display: block;
                 width: 100%;
@@ -92,5 +93,28 @@
     &__img{
         width: 100%;
         height: auto;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .doctors{
+        &__item{
+            width: 30%;
+        }
+    }
+}
+@media screen and (max-width: 600px){
+    .doctors{
+        &__item{
+            width: 45%;
+        }
+    }
+}
+@media screen and (max-width: 500px){
+    .doctors{
+        &__item{
+            width: 80%;
+            margin: 0 auto 20px;
+        }
     }
 }

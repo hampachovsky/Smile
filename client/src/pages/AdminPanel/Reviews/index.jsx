@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Review } from '../../../components';
+import 'swiper/css';
 import './index.scss';
 
 import reviewsIcon from '../../../images/reviews.svg';
@@ -31,35 +32,33 @@ export const Reviews = () => {
     }
 
     return (
-        <div className='admin-review' id='reviews'>
-            <div className='container'>
-                <h2 className='reviews__title title2 admin-review__title'>
-                    <img src={reviewsIcon} alt='Відгуки' className='menu__icon title_icon' />
-                    Відгуки
-                </h2>
-                <div className='reviews__wrapper'>
-                    <div className='admin-reviews__swiper'>
-                        <Swiper
-                            modules={[Navigation]}
-                            spaceBetween={50}
-                            slidesPerView={1}
-                            navigation={{
-                                prevEl: reviewsPrevRef.current,
-                                nextEl: reviewsNextRef.current,
-                            }}
-                            onBeforeInit={(swiper) => {
-                                setTimeout(() => {
-                                    swiper.params.navigation.prevEl = reviewsPrevRef.current;
-                                    swiper.params.navigation.nextEl = reviewsNextRef.current;
-                                    swiper.navigation.destroy();
-                                    swiper.navigation.init();
-                                    swiper.navigation.update();
-                                });
-                            }}
-                        >
-                            {twoElementsArray}
-                        </Swiper>
-                    </div>
+        <div className='admin-reviews' id='reviews'>
+            <h2 className='reviews__title title2 admin-review__title'>
+                <img src={reviewsIcon} alt='Відгуки' className='menu__icon title_icon' />
+                Відгуки
+            </h2>
+            <div className='reviews__wrapper'>
+                <div className='admin-reviews__swiper'>
+                    <Swiper
+                        modules={[Navigation]}
+                        spaceBetween={50}
+                        slidesPerView={1}
+                        navigation={{
+                            prevEl: reviewsPrevRef.current,
+                            nextEl: reviewsNextRef.current,
+                        }}
+                        onBeforeInit={(swiper) => {
+                            setTimeout(() => {
+                                swiper.params.navigation.prevEl = reviewsPrevRef.current;
+                                swiper.params.navigation.nextEl = reviewsNextRef.current;
+                                swiper.navigation.destroy();
+                                swiper.navigation.init();
+                                swiper.navigation.update();
+                            });
+                        }}
+                    >
+                        {twoElementsArray}
+                    </Swiper>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ export const Review = ({ isAdmin, review }) => {
           }
         : null;
     return (
-        <div style={style}>
+        <div className='reviews__content'>
             <div className='reviews__item'>
                 <div className='reviews__info'>
                     <p className='reviews__user-name'>{review.fullName}</p>

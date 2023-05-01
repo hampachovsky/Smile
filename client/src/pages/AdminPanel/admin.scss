@@ -18,6 +18,14 @@
         border-top: none;
         margin: 0 auto;
         padding: 20px 20px 0;
+
+        &__list{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+        }
     
         button{
             background-color: transparent;
@@ -31,6 +39,53 @@
     
             img{
                 margin-right: 5px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1100px){
+    .admin{
+        background-size: cover;
+        .logo{
+            display: none;
+        }
+        .menu{
+            width: 80%;
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+  .admin{
+    .menu{
+        width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 600px){
+    .admin{
+        .menu{
+            padding: 10px 0 0;
+        }
+    }
+}
+
+@media screen and (max-width: 500px){
+    .admin{
+        .menu{
+            &__list{
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+            &__item{
+                width: 34%; 
+
+                &:nth-child(n+3){
+                    margin-top: 15px;
+                }
             }
         }
     }
