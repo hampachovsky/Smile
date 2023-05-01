@@ -1,27 +1,17 @@
-import { useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigation, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import {
-    PricesRow,
-    Offer,
-    Doctor,
-    Review,
-    LeaveReview,
-    OrderCall,
-    DoctorAppointment,
-    AskQuestion,
-} from '../../components';
+import { AskQuestion, Doctor, LeaveReview, Offer, PricesRow, Review } from '../../components';
 
-import './home.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import './home.scss';
 
-import logo from '../../images/logo.png';
-import girl from '../../images/girl.png';
+import aboutUs from '../../images/about-us.jpg';
 import girl2 from '../../images/girl2.png';
-import tools from '../../images/tools.png';
 import servicesIcon1 from '../../images/services_icon1.png';
 import servicesIcon2 from '../../images/services_icon2.png';
 import servicesIcon3 from '../../images/services_icon3.png';
@@ -30,41 +20,62 @@ import servicesIcon5 from '../../images/services_icon5.png';
 import servicesIcon6 from '../../images/services_icon6.png';
 import servicesIcon7 from '../../images/services_icon7.png';
 import servicesIcon8 from '../../images/services_icon8.png';
-import aboutUs from '../../images/about-us.jpg';
 
-import whatsApp from '../../images/WhatsApp.svg';
-import twitter from '../../images/Twitter.svg';
-import telegram from '../../images/Telegram.svg';
-import facebook from '../../images/Facebook.svg';
-import instagram from '../../images/Instagram.svg';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
+import { fetchServices } from '../../store/slices/service/thunk';
+import { selectAllServices } from '../../store/slices/service/selectors';
+import { fetchDoctors } from '../../store/slices/doctor/thunk';
+import { selectAllDoctors } from '../../store/slices/doctor/selectors';
+import { fetchOffers } from '../../store/slices/offer/thunk';
+import { selectAllOffers } from '../../store/slices/offer/selectors';
+import { selectAllReviews } from '../../store/slices/review/selectors';
+import { fetchReviews } from '../../store/slices/review/thunk';
 
 export const Home = () => {
+    const dispatch = useDispatch();
+    const services = useSelector(selectAllServices);
+    const doctors = useSelector(selectAllDoctors);
+    const offers = useSelector(selectAllOffers);
+    const reviews = useSelector(selectAllReviews);
+
     const doctorsPrevRef = useRef(null);
     const doctorsNextRef = useRef(null);
     const reviewsPrevRef = useRef(null);
     const reviewsNextRef = useRef(null);
 
-    const service = {
-        service: 'Консультація лікаря-стоматолога',
-        price: '300',
-        currency: 'UAH',
-    };
+    useEffect(() => {
+        dispatch(fetchReviews());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchServices());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchDoctors());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchOffers());
+    }, [dispatch]);
+
+    const twoElementsArray = [];
+
+    for (let i = 0; i < reviews.length; i += 2) {
+        twoElementsArray.push(
+            <SwiperSlide key={i}>
+                <Review review={reviews[i]} />
+                {reviews[i + 1] && <Review review={reviews[i + 1]} />}
+            </SwiperSlide>,
+        );
+    }
 
     const [openLeaveReview, setOpenLeaveReview] = useState(false);
-    const [openOrderCall, setOpenOrderCall] = useState(false);
-    const [openDoctorAppointment, setOpenDoctorAppointment] = useState(false);
     const [openAskQuestion, setOpenAskQuestion] = useState(false);
 
     const toggleOpenLeaveReview = () => {
         setOpenLeaveReview(!openLeaveReview);
-    };
-
-    const toggleOpenOrderCall = () => {
-        setOpenOrderCall(!openOrderCall);
-    };
-
-    const toggleOpenDoctorAppointment = () => {
-        setOpenDoctorAppointment(!openDoctorAppointment);
     };
 
     const toggleOpenAskQuestion = () => {
@@ -73,95 +84,28 @@ export const Home = () => {
 
     return (
         <div>
-            <header className='header'>
-                <nav className='menu'>
-                    <div className='container'>
-                        <div className='menu__wrapper'>
-                            <a href='./' className='logo'>
-                                <img src={logo} alt='Smile' className='logo__img' />
-                            </a>
-                            <ul className='menu__list'>
-                                <li className='menu__item'>
-                                    <a href='#services' className='menu__link'>
-                                        Послуги
-                                    </a>
-                                </li>
-                                <li className='menu__item'>
-                                    <a href='#prices' className='menu__link'>
-                                        Ціни
-                                    </a>
-                                </li>
-                                <li className='menu__item'>
-                                    <a href='#doctors' className='menu__link'>
-                                        Лікарі
-                                    </a>
-                                </li>
-                                <li className='menu__item'>
-                                    <a href='#about-us' className='menu__link'>
-                                        Про нас
-                                    </a>
-                                </li>
-                                <li className='menu__item'>
-                                    <a href='#contacts' className='menu__link'>
-                                        Контакти
-                                    </a>
-                                </li>
-                                <li className='menu__item'>
-                                    <a href='#reviews' className='menu__link'>
-                                        Відгуки
-                                    </a>
-                                </li>
-                            </ul>
-                            <button
-                                className='menu__order-call'
-                                type='button'
-                                onClick={toggleOpenOrderCall}
-                            >
-                                Замовити дзвінок
-                            </button>
-                            {openOrderCall && <OrderCall handleClose={toggleOpenOrderCall} />}
-                        </div>
-                    </div>
-                </nav>
-                <div className='header__wrapper'>
-                    <div className='container'>
-                        <div className='header__content'>
-                            <div>
-                                <h1 className='header__title title1'>
-                                    Довірте свою посмішку професіоналам
-                                </h1>
-                                <p className='header__description'>
-                                    Ми надаємо комплексне лікуванння стоматологічних захворювань з
-                                    гарантією гарантією високо результату. <br /> Допомагати ваші
-                                    зуби-наша місія
-                                </p>
-                                <button
-                                    className='header__sign-up'
-                                    type='button'
-                                    onClick={toggleOpenDoctorAppointment}
-                                >
-                                    Записатися
-                                </button>
-                            </div>
-                            <div className='header__girl'>
-                                <div className='circle'></div>
-                                <img src={girl} alt='Дівчина' className='girl' />
-                            </div>
-                        </div>
-                    </div>
-                    <img src={tools} alt='Інструменти' className='header__tools' />
-                    {openDoctorAppointment && (
-                        <DoctorAppointment handleClose={toggleOpenDoctorAppointment} />
-                    )}
-                </div>
-            </header>
+            <Header />
             <div className='guarantee'>
                 <div className='container'>
                     <Swiper
                         modules={[Pagination]}
                         spaceBetween={50}
-                        slidesPerView={4}
+                        slidesPerView={1}
                         pagination={{ clickable: true }}
+                        breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 2,
+                            },
+                            700: {
+                                slidesPerView: 3,
+                            },
+                            1000: {
+                                slidesPerView: 4,
+                            },
+                        }}
                     >
                         <SwiperSlide>
                             <h3 className='guarantee__title title3'>1 рік гарантії</h3>
@@ -280,14 +224,9 @@ export const Home = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
-                            <PricesRow data={service} />
+                            {services.map((service) => (
+                                <PricesRow key={service.id} data={service} />
+                            ))}
                         </tbody>
                     </table>
                 </div>
@@ -298,21 +237,28 @@ export const Home = () => {
                     <Swiper
                         modules={[Pagination]}
                         spaceBetween={50}
-                        slidesPerView={4}
+                        slidesPerView={1}
                         pagination={{ clickable: true }}
+                        breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 2,
+                            },
+                            700: {
+                                slidesPerView: 3,
+                            },
+                            1000: {
+                                slidesPerView: 4,
+                            },
+                        }}
                     >
-                        <SwiperSlide>
-                            <Offer />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Offer />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Offer />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Offer />
-                        </SwiperSlide>
+                        {offers.map((offer) => (
+                            <SwiperSlide key={offer.id}>
+                                <Offer data={offer} />
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 </div>
             </div>
@@ -359,7 +305,7 @@ export const Home = () => {
                     <Swiper
                         modules={[Navigation]}
                         spaceBetween={50}
-                        slidesPerView={4}
+                        slidesPerView={1}
                         navigation={{
                             prevEl: doctorsPrevRef.current,
                             nextEl: doctorsNextRef.current,
@@ -373,22 +319,35 @@ export const Home = () => {
                                 swiper.navigation.update();
                             });
                         }}
+                        breakpoints={{
+                            0: {
+                                slidesPerView: 1,
+                            },
+                            500: {
+                                slidesPerView: 1.5,
+                            },
+                            600: {
+                                slidesPerView: 2,
+                            },
+                            768: {
+                                slidesPerView: 2.5,
+                            },
+                            900: {
+                                slidesPerView: 3,
+                            },
+                            1000: {
+                                slidesPerView: 3.5,
+                            },
+                            1200: {
+                                slidesPerView: 4,
+                            },
+                        }}
                     >
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Doctor />
-                        </SwiperSlide>
+                        {doctors.map((doctor) => (
+                            <SwiperSlide key={doctor.id}>
+                                <Doctor data={doctor} />
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                     <div className='doctors__left' ref={doctorsPrevRef} />
                     <div className='doctors__right' ref={doctorsNextRef} />
@@ -419,14 +378,7 @@ export const Home = () => {
                                     });
                                 }}
                             >
-                                <SwiperSlide>
-                                    <Review />
-                                    <Review />
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <Review />
-                                    <Review />
-                                </SwiperSlide>
+                                {twoElementsArray}
                             </Swiper>
                             <div className='reviews__navigation'>
                                 <div className='reviews__left' ref={reviewsPrevRef} />
@@ -457,47 +409,7 @@ export const Home = () => {
                     </div>
                 </div>
             </div>
-            <footer className='footer' id='contacts'>
-                <div className='container'>
-                    <div className='footer__wrapper'>
-                        <a href='./' className='footer__logo'>
-                            <img src={logo} alt='' className='logo' />
-                        </a>
-                        <div className='footer__phone'>
-                            <a href='tel:0685008923'>+380685008923</a>
-                            <a href='tel:0673399501'>+380673399501</a>
-                        </div>
-                        <div className='footer__email'>
-                            <a href='mailto: helpsmile@gmail.com'>Helpsmile@gmail.com</a>
-                            <a href='mailto: mysmile@gmail.com'>Mysmile@gmail.com</a>
-                        </div>
-                        <div className='footer__address'>
-                            <p>Адреса: місто Львів</p>
-                            <p>вулиця Ivana Rubchaka St 30/11</p>
-                        </div>
-                        <div className='footer__social'>
-                            <a href='./' className='footer__social-link'>
-                                <img src={whatsApp} alt='WhatsApp' />
-                            </a>
-                            <a href='./' className='footer__social-link'>
-                                <img src={twitter} alt='Twitter' />
-                            </a>
-                            <a href='./' className='footer__social-link'>
-                                <img src={telegram} alt='Telegram' />
-                            </a>
-                            <a href='./' className='footer__social-link'>
-                                <img src={facebook} alt='Facebook' />
-                            </a>
-                            <a href='./' className='footer__social-link'>
-                                <img src={instagram} alt='Instagram' />
-                            </a>
-                        </div>
-                        <button className='footer__order-call' type='button'>
-                            Замовити дзвінок
-                        </button>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };

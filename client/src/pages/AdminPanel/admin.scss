@@ -1,37 +1,93 @@
 @import '../../variable.scss';
 .admin{
-    height: 100vh;
     background-image: url('../../images/admin-bg.png');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
     position: relative;
+    min-height: 100vh;
 
     .logo{
         position: absolute;
         top: 20px;
         left: 20px;
     }
-}
 
-.menu{
-    width: 60%;
-    border: 1px solid #D9D9D9;
-    border-top: none;
-    margin: 0 auto;
-    padding: 20px 20px 0;
+    .menu{
+        width: 60%;
+        border: 1px solid #D9D9D9;
+        border-top: none;
+        margin: 0 auto;
+        padding: 20px 20px 0;
 
-    button{
-        background-color: transparent;
-        border: none;
-        outline: none;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        @include text(20px, 600, 22px);
-
-        img{
-            margin-right: 5px;
+        &__list{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+        }
+    
+        button{
+            background-color: transparent;
+            border: none;
+            outline: none;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            @include text(20px, 600, 22px);
+    
+            img{
+                margin-right: 5px;
+            }
         }
     }
 }
+
+@media screen and (max-width: 1100px){
+    .admin{
+        background-size: cover;
+        .logo{
+            display: none;
+        }
+        .menu{
+            width: 80%;
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+  .admin{
+    .menu{
+        width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 600px){
+    .admin{
+        .menu{
+            padding: 10px 0 0;
+        }
+    }
+}
+
+@media screen and (max-width: 500px){
+    .admin{
+        .menu{
+            &__list{
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+            &__item{
+                width: 34%; 
+
+                &:nth-child(n+3){
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+}
+

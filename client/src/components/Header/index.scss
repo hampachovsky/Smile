@@ -1,0 +1,271 @@
+@import '../../variable.scss';
+
+.header{
+    height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url("../../images/header-bg.jpg");
+    background-size: cover;
+
+
+    .menu{
+        padding: 20px 0;
+
+        &__wrapper{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__container{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 78%;
+            margin-left: auto;
+        }
+
+        &__list{
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            padding: 0;
+        }
+
+        &__item + .menu__item{
+            margin-left: 40px;
+        }
+
+        &__link{
+            color: $black;
+            text-decoration: none;
+        }
+
+        &__order-call{
+            @include button();
+        }
+
+        &__phone{
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            margin-right: 10px;
+            display: none;
+        }
+
+        .hamburger-react{
+            display: none;
+
+            div{
+                background-color: #214289 !important;
+            }
+        }
+
+        &__open{
+            display: flex;
+            align-items: center;
+        }
+
+        &__info{
+            display: none;
+        }
+
+    }
+
+
+      &__wrapper{
+          height: 100%;
+          position: relative;
+      }
+      .container{
+          height: 100%;
+      }
+
+    &__content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__info{
+        width: 50%;
+    }
+
+      &__description{
+          @include text(16px, 400, 22px);
+          margin: 0 0 20px 0;
+      }
+
+    &__sign-up{
+        @include button;
+    }
+
+    &__girl{
+        position: relative;
+        height: 100%;
+    }
+    &__sign-up{
+        @include button;
+    }
+
+    &__tools{
+        position: absolute;
+        bottom: -20%;
+        left: 8%;
+    }
+
+    &__girl{
+        position: relative;
+        height: 100%;
+        width: 50%;
+    }
+
+    .girl{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .header{
+        .menu{
+            &__item + .menu__item{
+                margin-left: 15px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+    .header{
+        .menu{
+            .logo{
+                position: relative;
+                z-index: 20;
+            }
+
+            &__container{
+                display: none;
+                position: absolute;
+                height: 200vh !important;
+                width: 100%;
+                left: 0;
+                top: 0;
+                background-color: #EBF3FF;
+                z-index: 5;
+
+                &.active{
+                    display: block;
+                }
+            }
+
+            &__list{
+                display: block;
+                margin-top: 100px;
+                padding: 0 20px;
+            }
+
+            &__item{
+                padding: 20px 20px 10px;
+                border-bottom: 1px solid #D9D9D9;
+
+
+                & + .menu__item {
+                    margin: 0;
+                }
+            }
+
+            &__link{
+                @include text(20px, 600, 24px);
+                color: $blue;
+            }
+
+            &__info{
+                display: block;
+                list-style:none;
+                padding: 0;
+                margin-left: 20px;
+
+                &-item{
+                    display: flex;
+                    align-items: center;
+                    padding: 0;
+                    color: #D9D9D9;
+                    margin: 0 0 20px 10px;
+                    p{
+                        margin: 0;
+                    }
+                }
+            }
+
+            &__order-call{
+                margin-left: 20px;
+            }
+
+            &__phone{
+                display: block;
+            }
+
+            .hamburger-react{
+                display: block;
+                z-index: 20;
+            }
+        }
+        &__tools{
+            display: none;
+        }
+    }
+
+}
+@media screen and (max-width: 650px){
+    .header{
+        &__content{
+            display: block;
+            height: calc(100% - 50px);
+            position: relative;
+        }
+
+        &__info{
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        &__girl{
+            position:absolute;
+            width: 70%;
+            height: auto;
+            margin-left: auto;
+            height:max-content;
+            bottom: -10px;
+            right: 0;
+        }
+
+        .girl{
+            position: static;
+        }
+    }
+}
+
+@media screen and (max-width: 550px){
+    .header{
+        &__description{
+            display: none;
+        }
+
+        &__content{
+            position: relative;
+        }
+
+    }
+    .guarantee{
+        padding: 20px 0;
+    }
+}
+
+

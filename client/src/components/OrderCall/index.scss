@@ -26,6 +26,10 @@
         cursor: pointer;
     }
 
+    &__description{
+        @include simpleText();
+    }
+
     &__form{
         margin-top: 40px;
         position: relative;
@@ -85,6 +89,39 @@
     &__submit{
         @include button();
         margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 1100px){
+    .order-call{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .order-call{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .order-call{
+        &__description{
+            margin: 5px 0;
+        }
+        &__form{
+            margin-top: 10px;
+        }
+        &__agree-block{
+            margin-top: 15px;
+        }
+        label{
+            font-size: 12px;
+            line-height: 15px;
+        }
+        input::placeholder{
+            font-size: 14px;
+        }
     }
 }
 

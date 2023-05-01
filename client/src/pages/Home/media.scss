@@ -1,0 +1,129 @@
+
+@media screen and (max-width: 1400px){
+    .doctors{
+        .swiper{
+            width: calc(100% - 120px);
+        }
+
+        &__left{
+            left: 10px;
+        }
+
+        &__right{
+            right: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .reviews{
+        &__swiper{
+            width: 50%;
+        }
+
+        &__girl{
+            width: 45%;
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+    .guarantee{
+        background-size: cover;
+    }
+
+    .services{
+        &__item{
+            width: 45%;
+        }
+    }
+
+    .prices{
+        th:last-child, td:last-child{
+            display: none;
+            width: 0;
+        }
+    }
+
+    .about-us{
+        background-size: cover;
+        &__wrapper{
+            display: block;
+        }
+
+        &__content{
+            width: 100%;
+        }
+
+        &__block-img{
+            width: 70%;
+            margin: 50px auto 0 auto;
+
+            &::before{
+                right: -55px;
+                top: -20px;
+                left: auto;
+            }
+
+            &::after{
+                right: -30px;
+                left: auto;
+            }
+        }
+    }
+
+    .reviews{
+        padding-bottom: 10px;
+        &__wrapper{
+            display: block;
+        }
+        &__swiper{
+            width: 100%;
+        }
+        &__girl{
+            display: none;
+        }
+    }
+}
+
+
+@media screen and (max-width: 500px){
+    .services{
+        &__item{
+            width: 45%;
+        }
+    }
+}
+
+@media screen and (max-width: 450px){
+    .prices{
+        th{
+            font-weight: 700;
+        }
+    }
+
+    .offers{
+        &__subtitle{
+            @include text(16px, 700, 22px);
+        }
+    }
+
+    .about-us{
+        &__block-img{
+            width: 80%;
+
+            &::before{
+                width: 70px;
+                height: 70px;
+                right: -20px;
+            }
+
+            &::after{
+                width: 20px;
+                height: 20px;
+                right: -5px;
+                top: -10px;
+            }
+        }
+    }
+}

@@ -1,14 +1,12 @@
-import doctor from '../../images/doctor.jpg';
-
-export const Doctor = () => (
+export const Doctor = ({ data }) => (
     <>
-        <img src={doctor} alt='Лікар' className='doctors__img' />
-        <h3 className='doctors__name title3'>Петров Максим Максимович</h3>
+        <img src={data.photo} alt='Лікар' className='doctors__img' />
+        <h3 className='doctors__name title3'>{data.fullName}</h3>
         <p className='doctors__experience'>
-            <span>Стаж:</span> 9 років
+            <span>Стаж:</span> {data.experience} років
         </p>
         <p className='doctors__specialization'>
-            <span>Спеціалізація:</span> Хірургія
+            <span>Спеціалізація:</span> {data.specialization}
         </p>
     </>
 );
