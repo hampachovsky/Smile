@@ -49,7 +49,9 @@ export const Header = () => {
                                         href='#services'
                                         className='menu__link'
                                         onClick={() => {
-                                            onToggle();
+                                            if (isOpen) {
+                                                onToggle();
+                                            }
                                             toggleOpen();
                                         }}
                                     >
@@ -61,7 +63,9 @@ export const Header = () => {
                                         href='#prices'
                                         className='menu__link'
                                         onClick={() => {
-                                            onToggle();
+                                            if (isOpen) {
+                                                onToggle();
+                                            }
                                             toggleOpen();
                                         }}
                                     >
@@ -73,7 +77,9 @@ export const Header = () => {
                                         href='#doctors'
                                         className='menu__link'
                                         onClick={() => {
-                                            onToggle();
+                                            if (isOpen) {
+                                                onToggle();
+                                            }
                                             toggleOpen();
                                         }}
                                     >
@@ -85,7 +91,9 @@ export const Header = () => {
                                         href='#about-us'
                                         className='menu__link'
                                         onClick={() => {
-                                            onToggle();
+                                            if (isOpen) {
+                                                onToggle();
+                                            }
                                             toggleOpen();
                                         }}
                                     >
@@ -97,7 +105,9 @@ export const Header = () => {
                                         href='#contacts'
                                         className='menu__link'
                                         onClick={() => {
-                                            onToggle();
+                                            if (isOpen) {
+                                                onToggle();
+                                            }
                                             toggleOpen();
                                         }}
                                     >
@@ -109,7 +119,9 @@ export const Header = () => {
                                         href='#reviews'
                                         className='menu__link'
                                         onClick={() => {
-                                            onToggle();
+                                            if (isOpen) {
+                                                onToggle();
+                                            }
                                             toggleOpen();
                                         }}
                                     >
